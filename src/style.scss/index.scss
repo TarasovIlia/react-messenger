@@ -1,0 +1,17 @@
+@import './font.scss';
+@import './components/app.scss';
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.hello {
+    text-align: center;
+}
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
