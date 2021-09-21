@@ -1,32 +1,51 @@
-import React, { useState } from 'react';
-import Message from './Message.jsx';
-import GET_ALL_MESSAGE from '../API/GET_ALL_MESSAGE.jsx';
-import SEND_MESSAGE from '../api/SEND_MESSAGE.jsx';
+import React, { useState, useCallback, useEffect } from 'react';
+import Questions from './Questions.jsx';
+import AddNewQuestion from './AddNewQuestion.jsx';
+import Header from './Header.jsx';
+import QuestionsList from './QuestionsList.jsx';
+import { useHttp } from '../hooks/http.hook.js';
 
 export default function App() {
-    const getMessage = GET_ALL_MESSAGE()
-    const [newMessage, setNewMessage] = useState('')
-    const nowDate = Date.now()
-    const sendDate = ''
+    const [data, setData] = useState([])
+    const {loading, request} = useHttp()
+    const [switchView, setSwitchView] = useState(false)
+    const [start, setStart] = useState(false)
 
-    const setMessage = (e) => setNewMessage(e.target.value)
-    const pushNewMessage = () => {
-        SEND_MESSAGE(newMessage)
-    } 
-    const SortMessages = getMessage.sort((a,b) => {
-        if (a.date > b.date) return -1
-        if (a.date < b.date) return 1
-        return 0
-    })
-    const messages = SortMessages.map(data => <Message date={data.date} key={data.id} body={data.body} from={data.from} /> )
+    const handlerSwitchView = () =>  setSwitchView(!switchView)
+    const hendlerStart = () =>  setStart(!start)
+
+    const fetchQuestion = useCallback(async () => {
+        try {
+          const fetched = await request('http://localhost:3000/api/question', 'GET', null)
+          setData(fetched)
+        } catch (e) {
+            console.log(e.message)
+        }
+    }, [request])
+    
+    useEffect(() => {
+        fetchQuestion()
+    }, [fetchQuestion])
+    
+    const questionCard = data.map(data => <Questions question={data.question} topic={data.topic} key={data._id} />)
+
     return (
         <div className='main-wrapper'>
-            <h2 className='hello'>hello new App</h2>
-            <section className='dispalay'>
-                {messages}
-            </section>
-            <input onChange={setMessage} type="text" />
-            <button onClick={pushNewMessage}>send</button>
+            <Header startOnClick={hendlerStart} switchOnClick={handlerSwitchView}/>
+            {start ?
+                <QuestionsList/>
+                :
+                <div className='content'>
+                <h2 className='hello'>hello new App</h2>
+                {switchView ? 
+                <section className='dispalay'>
+                    {questionCard} 
+                </section>
+                :
+                <section>
+                    <AddNewQuestion topic={data.topic} />
+                </section>}
+            </div>}
         </div>
     )
 }

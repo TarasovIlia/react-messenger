@@ -1,0 +1,12 @@
+.input :active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+.question-input {    
+    border: 1px solid #000;
+    width: 100%;
+    height: 42px;
+    padding: 12px;
+    border-radius: 2px;
+}
+

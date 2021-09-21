@@ -1,0 +1,42 @@
+.button {
+    background-color: #fff;
+    box-shadow: 1px 1px 6px 0px rgb(129, 129, 129);
+    transition-duration: 0.2s;
+    border-radius: 9px;
+
+    padding: 12px 42px;
+    font-size: 18px;
+    font-weight: 600;
+
+    &:hover {
+        box-shadow: 1px 2px 6px 1px rgb(107, 107, 107);
+        transition-duration: 0.2s;
+    }
+
+
+    cursor: pointer;
+}
+
+.question-button {
+    margin-left: 100px;
+}
+
+.button-next {
+    margin-top: 100px;
+}
+.button-error {
+    background-color: #fff;
+    box-shadow: 1px 1px 6px 0px rgb(129, 129, 129);
+    transition-duration: 0.2s;
+    border-radius: 9px;
+    &:hover {
+        box-shadow: 1px 2px 6px 1px rgb(107, 107, 107);
+        transition-duration: 0.2s;
+    }
+    padding: 6px 15px;
+    font-size: 18px;
+    font-weight: 600;
+
+    cursor: pointer;
+    color: red;
+}
