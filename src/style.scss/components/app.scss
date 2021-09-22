@@ -2,6 +2,7 @@
 @import '../input/button.scss';
 @import '../input/radio.scss';
 @import '../components/modal.scss';
+@import '../components/card.scss';
 
 .main-wrapper{
     margin: 0px auto;
@@ -20,21 +21,6 @@
             grid-template-columns: 1fr 1fr 1fr;
             grid-column-gap: 15px;
             grid-row-gap: 20px;
-            .card {
-                padding: 16px 12px;
-                border-radius: 2px;
-                box-shadow: 1px 1px 3px 1px rgb(136, 134, 134);
-                transition-duration: 0.3s;
-                cursor: pointer;
-                p {
-                    max-width: 100%;
-                    line-height: 26px;
-                }
-                &:hover {
-                    box-shadow: 1px 2px 8px 1px rgb(136, 134, 134);
-                    transition-duration: 0.3s;
-                }
-            }
         }
         .form {
             margin-top: 55px;

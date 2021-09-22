@@ -18,22 +18,22 @@ export default function App() {
         <Router history={history}>
             <Header />
             <div className='main-wrapper'>
-            <Switch>
                 <div className='content'>
-                    <Route exact={true} history={history} path='/'>
-                        <Home />
-                    </Route>
-                    <Route history={history} path='/all'>
-                        <Questions />
-                    </Route>
-                    <Route history={history} path='/addnew'>
-                        <AddNewQuestion />
-                    </Route>
-                    <Route history={history} path='/questions'>
-                        <QuestionsList />
-                    </Route>
+                    <Switch>
+                        <Route exact={true} history={history} path='/'>
+                            <Home />
+                        </Route>
+                        <Route history={history} path='/all'>
+                            <Questions />
+                        </Route>
+                        <Route history={history} path='/addnew'>
+                            <AddNewQuestion />
+                        </Route>
+                        <Route history={history} path='/questions'>
+                            <QuestionsList />
+                        </Route>
+                    </Switch>
                 </div>
-            </Switch>
             </div>
         </Router>
     )

@@ -1,4 +1,4 @@
-import QuestionsCard from './QuestionsCard.jsx';
+import Card from './Card.jsx';
 import React, { useState, useCallback, useEffect } from 'react';
 import { useHttp } from '../hooks/http.hook.js';
 
@@ -20,7 +20,7 @@ export default function QuestionsList() {
         fetchQuestion()
     }, [fetchQuestion])
 
-    const questionList = data.map(data => <QuestionsCard key={data.key} question={data.question} topic={data.topic} resolved={data.resolved}/>)
+    const questionList = data.map(data => <Card key={data.key} question={data.question} topic={data.topic} resolved={data.resolved}/>)
 
     function randomInd()  {
         let nextInd = (Math.floor(Math.random() * 10)) % data.length

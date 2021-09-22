@@ -8,12 +8,12 @@ export default function AddNewQuestion() {
     const [data, setData] = useState([])
     const {loading, request} = useHttp()
     const [formQuestion, setFormQuestion] = useState({
-        question: '', topic: ''
+        question: '', topic: null
     })
     const [formTopic, setFormTopic] = useState({
         topic : '', level : '1'
     })
-    const handelTopic = (topic) => setFormQuestion({topic: topic})
+    const handelTopic = topic => setFormQuestion({topic: topic})
     console.log(formQuestion.topic)
 
     const changeFormQuestion = event => {
@@ -33,7 +33,7 @@ export default function AddNewQuestion() {
                 SetSendConfirm(true)
             }
             else {
-                setError(!error)
+                setError(true)
             }
         } catch (err) {}
     }
@@ -46,7 +46,7 @@ export default function AddNewQuestion() {
                 SetSendConfirm(true)
             }
             else {
-                setError(!error)
+                setError(true)
             }
         } catch (err) {}
     }

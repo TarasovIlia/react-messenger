@@ -10,6 +10,13 @@ body {
     box-sizing: border-box;
 }
 
+.row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 button {
     box-shadow: none;

@@ -40,3 +40,16 @@
     cursor: pointer;
     color: red;
 }
+
+.button-delete {
+    background-color: #fff;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    transition-duration: 0.2s;
+}
+
+.hide {
+    transition-duration: 0.2s;
+    left: -200px;
+}
