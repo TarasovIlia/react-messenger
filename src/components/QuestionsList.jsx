@@ -5,12 +5,16 @@ import { useHttp } from '../hooks/http.hook.js';
 
 export default function QuestionsList() {
     const [topic, setTopic] = useState([])
-    const [filter, setFilter] = useState(0)
+    const [filter, setFilter] = useState('')
     const [ind, setInd] = useState(0)
     const [questions, setQuestions] = useState([])
     const {loading, request} = useHttp()
 
     const handelTopic = filter => setFilter(filter)
+
+    const resetFilter = () => {
+        setFilter('')
+    }
 
     const fetchQuestion = useCallback(async () => {
         try {
@@ -44,35 +48,41 @@ export default function QuestionsList() {
     const radoiFilter = topic.map(data => <Radio handelTopic={handelTopic} topic={data.topic} key={data._id} />)
 
     function randomInd()  {
-        let nextInd = (Math.floor(Math.random() * 10)) % data.length
-        if (nextInd === (data.length - 1)) return nextInd-=1
-        else return nextInd
+        return (Math.floor(Math.random() * 10)) % data.length
     }
 
     function nextQuestion() {
         if (data.length != 1) {
-            const nextInd = randomInd()
-            if ((data.length-1) === 2 && nextInd === 0) {
-                setInd(0)
-            }
-            else if (nextInd != ind) {
-                data.splice(ind, 1)
+            let nextInd = randomInd()
+            if ( nextInd != ind ) {
                 setInd(nextInd)
+                data.splice(ind, 1)
             }
-            else nextQuestion()
+            else {
+                nextQuestion()
+            }
+            console.table(randomInd(), data.length)
         }
-        else setInd(0)
+        else return setInd(0)
     }
 
-    const disable = data.length === 1
-    const color = {color : disable && 'green'}
+    const disable = data.length < 1
+    const done = data.length === 1
+    const color = {color : done && 'green', opacity : done && '0.4'}
 
     return (
         <div className='list'>
             {radoiFilter}
+            <div>
+                {filter && <button onClick={resetFilter} className='button'>All topic</button>}
+            </div>
+            {!disable ? 
             <section className='question'>
-                {questionList[ind]}
+                {questionList[data.length === 1 ? 0 : ind]}
             </section>
+            :
+            <h1 style={{ marginTop : '120px' }}>No more qustions</h1>
+            }
             <button className='button button-next' style={color} onClick={nextQuestion}>{disable ? 'done' : 'next'}</button>
         </div>
     )
