@@ -1,51 +1,40 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React from 'react';
+import {
+    Router,
+    Route, 
+    Link, 
+    Switch 
+} from "react-router-dom";
+import { createBrowserHistory } from 'history';
+import Home from './Home'
 import Questions from './Questions.jsx';
 import AddNewQuestion from './AddNewQuestion.jsx';
 import Header from './Header.jsx';
 import QuestionsList from './QuestionsList.jsx';
-import { useHttp } from '../hooks/http.hook.js';
 
 export default function App() {
-    const [data, setData] = useState([])
-    const {loading, request} = useHttp()
-    const [switchView, setSwitchView] = useState(false)
-    const [start, setStart] = useState(false)
-
-    const handlerSwitchView = () =>  setSwitchView(!switchView)
-    const hendlerStart = () =>  setStart(!start)
-
-    const fetchQuestion = useCallback(async () => {
-        try {
-          const fetched = await request('http://localhost:3000/api/question', 'GET', null)
-          setData(fetched)
-        } catch (e) {
-            console.log(e.message)
-        }
-    }, [request])
-    
-    useEffect(() => {
-        fetchQuestion()
-    }, [fetchQuestion])
-    
-    const questionCard = data.map(data => <Questions question={data.question} topic={data.topic} key={data._id} />)
-
+    const history = createBrowserHistory()
     return (
-        <div className='main-wrapper'>
-            <Header startOnClick={hendlerStart} switchOnClick={handlerSwitchView}/>
-            {start ?
-                <QuestionsList/>
-                :
+        <Router history={history}>
+            <Header />
+            <div className='main-wrapper'>
+            <Switch>
                 <div className='content'>
-                <h2 className='hello'>hello new App</h2>
-                {switchView ? 
-                <section className='dispalay'>
-                    {questionCard} 
-                </section>
-                :
-                <section>
-                    <AddNewQuestion topic={data.topic} />
-                </section>}
-            </div>}
-        </div>
+                    <Route exact={true} history={history} path='/'>
+                        <Home />
+                    </Route>
+                    <Route history={history} path='/all'>
+                        <Questions />
+                    </Route>
+                    <Route history={history} path='/addnew'>
+                        <AddNewQuestion />
+                    </Route>
+                    <Route history={history} path='/questions'>
+                        <QuestionsList />
+                    </Route>
+                </div>
+            </Switch>
+            </div>
+        </Router>
     )
 }

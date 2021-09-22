@@ -5,7 +5,8 @@
 
 .main-wrapper{
     margin: 0px auto;
-    margin-top: 20px;
+    margin-top: 170px;
+    margin-bottom: 110px;
     width: 80%;
     h2 {
         color: $basicColor;
@@ -27,6 +28,7 @@
                 cursor: pointer;
                 p {
                     max-width: 100%;
+                    line-height: 26px;
                 }
                 &:hover {
                     box-shadow: 1px 2px 8px 1px rgb(136, 134, 134);

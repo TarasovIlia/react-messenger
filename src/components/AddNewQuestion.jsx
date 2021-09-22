@@ -13,18 +13,24 @@ export default function AddNewQuestion() {
     const [formTopic, setFormTopic] = useState({
         topic : '', level : '1'
     })
-    const handlerTopic = (topic) => setFormQuestion({topic: topic})
+    const handelTopic = (topic) => setFormQuestion({topic: topic})
+    console.log(formQuestion.topic)
 
-
-    const changeFormQuestion = event => setFormQuestion({ ...formQuestion, [event.target.name] : event.target.value})
-    const changeFormTopic = event => setFormTopic({ ...formTopic, [event.target.name] : event.target.value})
+    const changeFormQuestion = event => {
+        setFormQuestion({ ...formQuestion, [event.target.name] : event.target.value})
+        SetSendConfirm(false)
+    } 
+    const changeFormTopic = event => {
+        setFormTopic({ ...formTopic, [event.target.name] : event.target.value})
+        SetSendConfirm(false)
+    }
 
     const pushNewQuestion = async () => {
         try {
             if (formQuestion.question.length > 0 && formQuestion.topic.length > 0) {
                 const data = await request('http://localhost:3000/api/question/send', 'POST', {...formQuestion})
                 setFormQuestion({ question: ''})
-                SetSendConfirm(!sendConfirm)
+                SetSendConfirm(true)
             }
             else {
                 setError(!error)
@@ -37,7 +43,7 @@ export default function AddNewQuestion() {
             if (formTopic.topic.length > 0) {
                 const data = await request('http://localhost:3000/api/question/topic', 'POST', {...formTopic})
                 setFormTopic({ topic : '', level : '1' })
-                SetSendConfirm(!sendConfirm)
+                SetSendConfirm(true)
             }
             else {
                 setError(!error)
@@ -58,7 +64,7 @@ export default function AddNewQuestion() {
         fetchTopic()
     }, [fetchTopic])
 
-    const radio = data.map(data => <Radio handlerTopic={handlerTopic} key={data._id} topic={data.topic} />)
+    const radio = data.map(data => <Radio handelTopic={handelTopic} key={data._id} topic={data.topic} />)
 
     return (
         <div className="form">

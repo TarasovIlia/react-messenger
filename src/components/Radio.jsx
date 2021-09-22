@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Radio(props) {
-
+    const handelChange = () => {
+        props.handelTopic(props.topic)
+    }
     return (
         <div className="radio-form">
-            <input className='radio' type='radio' name='topic' id={props.topic}/>
-            <label onClick={() => props.handlerTopic(props.topic)} className='radio-label' htmlFor={props.topic}><p>{props.topic}</p></label>
+            <input onChange={handelChange} className='radio' type='radio' name='topic' id={props.topic}/>
+            <label className='radio-label' htmlFor={props.topic}><p>{props.topic}</p></label>
         </div>
     )
 }
