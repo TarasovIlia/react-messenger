@@ -41,7 +41,6 @@ export default function QuestionsList() {
             else {
                 nextQuestion()
             }
-            console.table(randomInd(), data.length)
         }
     }
     

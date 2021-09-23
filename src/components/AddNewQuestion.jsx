@@ -14,7 +14,6 @@ export default function AddNewQuestion() {
     })
 
     const handelTopic = selectedTopic => setFormQuestion({topic: selectedTopic})
-    console.log(formQuestion.topic)
 
     const changeFormQuestion = event => {
         setFormQuestion({ ...formQuestion, [event.target.name] : event.target.value})
@@ -53,15 +52,6 @@ export default function AddNewQuestion() {
 
     return (
         <div className="form">
-            {sendConfirm && 
-            <div className='success-message'>
-                <p>Created successfully</p>
-            </div>}
-            {error && 
-            <div className='error-messsage'>
-                <p>pleace, enter all require data and select topic</p>
-                <button className='button-error' onClick={() => setError(!error)}>ok</button>
-            </div>}
             <div className='input-container'>
                 <div className='radio-container'>
                     <RadioTabs handelTopic={handelTopic} />
@@ -99,6 +89,17 @@ export default function AddNewQuestion() {
                 className="button question-button"
                 >create new topic</button>
             </div>
+            {sendConfirm && 
+            <div className='success-message'>
+                <p>Created successfully</p>
+            </div>
+            }
+            {error && 
+            <div className='error-messsage'>
+                <p>pleace, enter all require data and select topic</p>
+                <button className='button-error' onClick={() => setError(!error)}>ok</button>
+            </div>
+            }
         </div>
     )
 }
