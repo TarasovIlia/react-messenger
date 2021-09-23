@@ -6,7 +6,7 @@ export default function Radio(props) {
     }
     return (
         <div className="radio-form">
-            <input onChange={handelChange} className='radio' type='radio' name='topic' id={props.topic}/>
+            <input onClick={handelChange} className='radio' type='radio' name='topic' id={props.topic}/>
             <label className='radio-label' htmlFor={props.topic}><p>{props.topic}</p></label>
         </div>
     )

@@ -36,16 +36,16 @@ export default function QuestionsCard(props) {
             >Delete</button>
             {modal && 
             <div className='modal-cart-menu'>
-                <p>delete selected questions</p>
+                <p className='topic'>delete selected questions?</p>
                 <div className='row'>
                     <button 
                     onClick={() => deleteQuestions()} 
-                    className='button button-error' 
+                    className='button-error' 
                     style={{color : 'red'}}
                     >Yes</button>
                     <button 
                     onClick={() => setModal(!modal)} 
-                    className='button button-error' 
+                    className='button-error' 
                     style={{color : 'green'}}
                     >No</button>
                 </div>

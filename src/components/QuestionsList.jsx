@@ -63,12 +63,11 @@ export default function QuestionsList() {
             }
             console.table(randomInd(), data.length)
         }
-        else return setInd(0)
     }
 
     const disable = data.length < 1
     const done = data.length === 1
-    const color = {color : done && 'green', opacity : done && '0.4'}
+    const className = done ? 'button button-next done' : 'button button-next'
 
     return (
         <div className='list'>
@@ -83,7 +82,11 @@ export default function QuestionsList() {
             :
             <h1 style={{ marginTop : '120px' }}>No more qustions</h1>
             }
-            <button className='button button-next' style={color} onClick={nextQuestion}>{disable ? 'done' : 'next'}</button>
+            {disable || <button 
+            disabled={disable} 
+            className={className}
+            onClick={nextQuestion}
+            >{done ? 'done' : 'next'}</button>}
         </div>
     )
 }
