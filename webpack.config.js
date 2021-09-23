@@ -35,7 +35,7 @@ module.exports = {
         static: {
             directory: srcPath
         },
-        port: 4000,
+        port: process.env.PORT || 4000,
         hot: isDev
     },
     performance: {
