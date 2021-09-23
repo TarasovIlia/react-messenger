@@ -2,9 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useHttp } from '../hooks/http.hook';
 
 export default function RadioTabs(props) {
-    const [selected, setSeleced] = useState('')
+    //const [selected, setSeleced] = useState('')
     const [data, setData] = useState([])
     const { loading, request} = useHttp()
+
+    let host = window.location.pathname.split("/")[1] === 'addnew'
     
     const fetchData = useCallback(async () => {
         try {
@@ -22,22 +24,17 @@ export default function RadioTabs(props) {
     
     const radioTabs = data.map(data => 
         <div key={data._id} className="radio-form">
-            <input onClick={() => setSeleced(data.topic)} className='radio' type='radio' name='topic' id={data.topic}/>
+            <input onClick={() => props.handelTopic(data.topic)} className='radio' type='radio' name='topic' id={data.topic}/>
             <label className='radio-label' htmlFor={ data.topic}><p>{ data.topic}</p></label>
         </div>
     )
     
-    const handelChange = () => {
-        props.handelTopic(selected)
-    }
-    handelChange()
-    
     return (
         <div>
-            <div className="radio-form">
-                <input defaultChecked onClick={() => setSeleced('')} className='radio' type='radio' name='topic' id='all'/>
+            {host || <div className="radio-form">
+                <input defaultChecked onClick={() => props.handelTopic('')} className='radio' type='radio' name='topic' id='all'/>
                 <label htmlFor='all' className='radio-label'><p>All</p></label>
-            </div>
+            </div>}
             {radioTabs}
         </div>
     )

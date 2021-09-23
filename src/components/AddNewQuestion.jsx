@@ -7,7 +7,7 @@ export default function AddNewQuestion() {
     const [error, setError] = useState(false)
     const {loading, request} = useHttp()
     const [formQuestion, setFormQuestion] = useState({
-        question: '', topic: null
+        question: '', topic: ''
     })
     const [formTopic, setFormTopic] = useState({
         topic : '', level : '1'
@@ -59,12 +59,12 @@ export default function AddNewQuestion() {
             </div>}
             {error && 
             <div className='error-messsage'>
-                <p>pleace, enter all require data and choose topic</p>
+                <p>pleace, enter all require data and select topic</p>
                 <button className='button-error' onClick={() => setError(!error)}>ok</button>
             </div>}
             <div className='input-container'>
                 <div className='radio-container'>
-                    {/* <RadioTabs handelTopic={handelTopic} /> */}
+                    <RadioTabs handelTopic={handelTopic} />
                 </div>
                 <label className='label-form' htmlFor="question"><p>question</p></label>
                 <input 
