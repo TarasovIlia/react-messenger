@@ -1,7 +1,6 @@
 const path = require('path')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const { rule } = require('postcss')
 
 const srcPath = path.resolve(__dirname, './src/')
 const prodPath = path.resolve(__dirname, './prod/')
@@ -38,6 +37,9 @@ module.exports = {
         },
         port: 4000,
         hot: isDev
+    },
+    performance: {
+        hints: false
     },
     module: {
         rules: [

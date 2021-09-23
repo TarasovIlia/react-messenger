@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "prod": "cross-env NODE_ENV=production webpack --mode production",
-    "start": "webpack server --mode production --open"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode production --open"
   },
   "keywords": [],
   "author": "Iliya Tarasav",
