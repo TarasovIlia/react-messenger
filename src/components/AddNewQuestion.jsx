@@ -1,11 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import Radio from './Radio.jsx'
+import React, { useState } from 'react';
+import RadioTabs from './RadioTabs.jsx'
 import { useHttp } from '../hooks/http.hook.js';
 
 export default function AddNewQuestion() {
     const [sendConfirm, SetSendConfirm] = useState(false)
     const [error, setError] = useState(false)
-    const [data, setData] = useState([])
     const {loading, request} = useHttp()
     const [formQuestion, setFormQuestion] = useState({
         question: '', topic: null
@@ -13,7 +12,8 @@ export default function AddNewQuestion() {
     const [formTopic, setFormTopic] = useState({
         topic : '', level : '1'
     })
-    const handelTopic = topic => setFormQuestion({topic: topic})
+
+    const handelTopic = selectedTopic => setFormQuestion({topic: selectedTopic})
     console.log(formQuestion.topic)
 
     const changeFormQuestion = event => {
@@ -51,21 +51,6 @@ export default function AddNewQuestion() {
         } catch (err) {}
     }
 
-    const fetchTopic = useCallback(async () => {
-        try {
-          const fetched = await request('http://localhost:3000/api/question/topic/get', 'GET', null)
-          setData(fetched)
-        } catch (e) {
-            console.log(e.message)
-        }
-    }, [request])
-    
-    useEffect(() => {
-        fetchTopic()
-    }, [fetchTopic])
-
-    const radio = data.map(data => <Radio handelTopic={handelTopic} key={data._id} topic={data.topic} />)
-
     return (
         <div className="form">
             {sendConfirm && 
@@ -79,7 +64,7 @@ export default function AddNewQuestion() {
             </div>}
             <div className='input-container'>
                 <div className='radio-container'>
-                    {radio}
+                    {/* <RadioTabs handelTopic={handelTopic} /> */}
                 </div>
                 <label className='label-form' htmlFor="question"><p>question</p></label>
                 <input 
