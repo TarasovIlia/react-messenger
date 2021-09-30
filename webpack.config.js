@@ -40,14 +40,9 @@ module.exports = {
         extensions: ["*", ".js", ".jsx"] ,
     },
     devServer: {
-        historyApiFallback:{
-            disableHostCheck: true,
-            compress: true,
-            public: "https://front-test1.herokuapp.com/",
-            rewrites: [
-                { from: /favicon.ico/, to: 'public/favicon.ico'}
-            ]
-        },
+        allowedHosts: [
+            '.amazonaws.com'
+        ],
         static: {
             directory: srcPath
         },
