@@ -29,7 +29,7 @@ module.exports = {
         new CopyWebpakPlaugin({
             patterns: [
                 {
-                    from: path.resolve(__dirname, 'src/assets/img/favicon.ico'),
+                    from: path.resolve(__dirname, 'public/favicon.ico'),
                     to: path.resolve(__dirname, 'prod')
                 }
             ]
@@ -40,7 +40,11 @@ module.exports = {
         extensions: ["*", ".js", ".jsx"] ,
     },
     devServer: {
-        historyApiFallback: true,
+        historyApiFallback:{
+            rewrites: [
+                { from: /favicon.ico/, to: 'public/favicon.ico'}
+            ]
+        },
         static: {
             directory: srcPath
         },
