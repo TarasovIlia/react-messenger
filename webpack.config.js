@@ -41,7 +41,7 @@ module.exports = {
     },
     devServer: {
         allowedHosts: [
-            '.amazonaws.com'
+            '.herokuapp.com'
         ],
         static: {
             directory: srcPath
