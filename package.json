@@ -7,11 +7,9 @@
     "node": "16.5.0"
     },
   "scripts": {
-    "start": "serve -s build",
-    "build": "react-scripts build",
+    "start": "cross-env NODE_ENV=development webpack server --mode development --open",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "prod": "cross-env NODE_ENV=production webpack --mode production",
-    "heroku-postbuild": "npm run build"
+    "prod": "cross-env NODE_ENV=production webpack --mode production"
   },
   "keywords": [],
   "author": "Iliya Tarasav",
