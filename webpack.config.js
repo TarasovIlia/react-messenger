@@ -40,6 +40,7 @@ module.exports = {
         extensions: ["*", ".js", ".jsx"] ,
     },
     devServer: {
+        disableHostCheck: true,
         historyApiFallback:{
             compress: true,
             public: "https://front-test1.herokuapp.com/",
