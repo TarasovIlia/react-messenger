@@ -7,14 +7,22 @@
     "node": "16.5.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack server --mode development",
+    "start": "cross-env NODE_ENV=production webpack server --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "prod": "cross-env NODE_ENV=production webpack --mode production"
   },
   "keywords": [],
   "author": "Iliya Tarasav",
   "license": "ISC",
-  "proxy": "https://react-messenger-server.herokuapp.com/",
+  "proxy": {
+    "/proxy": {
+        "target": "https://react-messenger-server.herokuapp.com",
+        "pathRewrite": {
+                "^/proxy" : ""
+        },
+        "changeOrigin": true
+    }
+  },
   "devDependencies": {
     "@babel/cli": "^7.15.4",
     "@babel/core": "^7.15.5",
