@@ -41,6 +41,8 @@ module.exports = {
     },
     devServer: {
         historyApiFallback:{
+            compress: true,
+            public: "https://front-test1.herokuapp.com/",
             rewrites: [
                 { from: /favicon.ico/, to: 'public/favicon.ico'}
             ]
