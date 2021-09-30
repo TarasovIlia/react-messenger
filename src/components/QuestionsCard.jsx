@@ -12,7 +12,7 @@ export default function QuestionsCard(props) {
 
     async function deleteQuestions() {
         try {
-            const data = await request('http://localhost:3000/api/question/delete', 'DELETE', {...formQuestion})
+            const data = await request('/api/question/delete', 'DELETE', {...formQuestion})
             setModal(!modal)
         } catch (err) {}
     }
