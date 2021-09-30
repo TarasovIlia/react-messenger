@@ -45,7 +45,7 @@ module.exports = {
             directory: srcPath
         },
         port: process.env.PORT || 4000,
-        hot: isDev
+        hot: true
     },
     performance: {
         hints: false

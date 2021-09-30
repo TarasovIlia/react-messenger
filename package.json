@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack server --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "prod": "cross-env NODE_ENV=production webpack --mode production",
-    "start": "webpack server --mode production"
+    "prod": "cross-env NODE_ENV=production webpack --mode production"
   },
   "keywords": [],
   "author": "Iliya Tarasav",
