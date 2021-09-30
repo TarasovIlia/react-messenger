@@ -12,7 +12,7 @@ export default function QuestionsList() {
     
     const fetchQuestion = useCallback(async () => {
         try {
-            const fetched = await request('http://localhost:3000/api/question', 'GET', null)
+            const fetched = await request('/api/question', 'GET', null)
             setQuestions(fetched)
         } catch (e) {
             console.log(e.message)

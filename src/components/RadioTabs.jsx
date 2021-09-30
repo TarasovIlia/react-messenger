@@ -10,7 +10,7 @@ export default function RadioTabs(props) {
     
     const fetchData = useCallback(async () => {
         try {
-            const fetched = await request('http://localhost:3000/api/question/topic/get', 'GET', null)
+            const fetched = await request('/api/question/topic/get', 'GET', null)
             setData(fetched)
         } catch (e) {
             console.log(e.message)

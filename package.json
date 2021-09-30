@@ -14,6 +14,7 @@
   "keywords": [],
   "author": "Iliya Tarasav",
   "license": "ISC",
+  "proxy": "https://react-messenger-server.herokuapp.com/",
   "devDependencies": {
     "@babel/cli": "^7.15.4",
     "@babel/core": "^7.15.5",

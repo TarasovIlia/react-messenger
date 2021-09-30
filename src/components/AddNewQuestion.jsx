@@ -27,7 +27,7 @@ export default function AddNewQuestion() {
     const pushNewQuestion = async () => {
         try {
             if (formQuestion.question.length > 0 && formQuestion.topic.length > 0) {
-                const data = await request('http://localhost:3000/api/question/send', 'POST', {...formQuestion})
+                const data = await request('/api/question/send', 'POST', {...formQuestion})
                 setFormQuestion({ question: ''})
                 SetSendConfirm(true)
             }
@@ -40,7 +40,7 @@ export default function AddNewQuestion() {
     const pushNewTopic = async () => {
         try {
             if (formTopic.topic.length > 0) {
-                const data = await request('http://localhost:3000/api/question/topic', 'POST', {...formTopic})
+                const data = await request('/api/question/topic', 'POST', {...formTopic})
                 setFormTopic({ topic : '', level : '1' })
                 SetSendConfirm(true)
             }

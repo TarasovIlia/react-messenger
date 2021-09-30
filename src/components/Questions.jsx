@@ -13,7 +13,7 @@ export default function Questions() {
 
     const fetchQuestion = useCallback(async () => {
         try {
-          const fetched = await request('http://localhost:3000/api/question', 'GET', null)
+          const fetched = await request('/api/question', 'GET', null)
           setData(fetched)
         } catch (e) {
             console.log(e.message)
