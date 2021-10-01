@@ -10,7 +10,7 @@ export default function QuestionsList() {
 
     const getData = useCallback( async () => {
         try {
-            const response = await API.get('https://back-test1.herokuapp.com/api/question')
+            const response = await API.get('/api/question')
             setQuestions(response.data)
         } catch (error) {
             console.log(error)

@@ -1,8 +1,9 @@
-import React, { useState, useCallback, useEffect} from 'react';
+import React, { useState, useCallback, useEffect, Suspense} from 'react';
 import { Link } from 'react-router-dom'
-import QuestionsCard from './QuestionsCard';
-import RadioTabs from './RadioTabs.jsx';
 import { API } from '../axios/axios.jsx';
+import QuestionsCard from './QuestionsCard';
+import Spinner from './spinner/Spinner'
+const RadioTabs = React.lazy(() => import ('./RadioTabs.jsx'))
 
 export default function Questions() {
     const [filter, setFilter] = useState('')
@@ -12,7 +13,7 @@ export default function Questions() {
 
     const getData = useCallback( async () => {
         try {
-            const response = await API.get('https://back-test1.herokuapp.com/api/question')
+            const response = await API.get('/api/question')
             setData(response.data)
         } catch (error) {
             console.log(error)
@@ -28,7 +29,9 @@ export default function Questions() {
     
     return (
         <div>
-            <RadioTabs handelTopic={handelTopic} />
+            <Suspense fallback={<Spinner />}>
+                <RadioTabs handelTopic={handelTopic} />
+            </Suspense>
             <section className='dispalay'>
                 {questionCard}
                 <Link to="/addnew">

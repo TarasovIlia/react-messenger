@@ -9,7 +9,7 @@ export default function RadioTabs(props) {
 
     const getData = useCallback( async () => {
         try {
-            const response = await API.get('https://back-test1.herokuapp.com/api/question/topic/get')
+            const response = await API.get('/api/question/topic/get')
             setData(response.data)
         } catch (error) {
             console.log(error)

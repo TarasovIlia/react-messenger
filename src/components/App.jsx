@@ -3,7 +3,8 @@ import {
     Router,
     Route, 
     Link, 
-    Switch 
+    Switch, 
+    Redirect
 } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 import Home from './Home'

@@ -51,6 +51,10 @@
             justify-content: space-between;
             p {
                 padding: 20px 0px;
+                &:first-child {
+                    font-size: 22px;
+                }
+                font-size: 30px;
             }
         }
     }

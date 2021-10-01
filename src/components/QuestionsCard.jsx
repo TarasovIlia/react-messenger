@@ -11,7 +11,7 @@ export default function QuestionsCard(props) {
 
     const deleteQuestions = async () => {
         try {
-            await API.delete('https://back-test1.herokuapp.com/api/question/delete', {...formQuestion})
+            await API.delete('/api/question/delete', {...formQuestion})
             setModal(!modal)
         } catch (error) {
             console.log(error)
