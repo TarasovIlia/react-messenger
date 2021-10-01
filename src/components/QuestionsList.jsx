@@ -1,27 +1,26 @@
 import Card from './Card.jsx';
 import RadioTabs from './RadioTabs'
 import React, { useState, useCallback, useEffect } from 'react';
-import { useHttp } from '../hooks/http.hook.js';
+import { API } from '../axios/axios.jsx';
 
 export default function QuestionsList() {
     const [filter, setFilter] = useState('')
     const [ind, setInd] = useState(0)
     const [questions, setQuestions] = useState([])
-    const {loading, request} = useHttp()
 
-    
-    const fetchQuestion = useCallback(async () => {
+    const getData = useCallback( async () => {
         try {
-            const fetched = await request('/api/question', 'GET', null)
-            setQuestions(fetched)
-        } catch (e) {
-            console.log(e.message)
+            const response = await API.get('https://back-test1.herokuapp.com/api/question')
+            setQuestions(response.data)
+        } catch (error) {
+            console.log(error)
         }
-    }, [request])
+    })
     
-    useEffect(() => {
-        fetchQuestion()
-    }, [fetchQuestion])
+    useEffect(()=>{
+        getData()
+    }, [getData])
+    
     
     const data = filter ?  questions.filter(question => question.topic === filter) : questions
     const questionList = data.map(data => <Card key={data.key} question={data.question} topic={data.topic} resolved={data.resolved}/>)

@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
-import { useHttp } from '../hooks/http.hook.js';
+import { API } from '../axios/axios'
+
 
 export default function QuestionsCard(props) {
     const [showDeleteButton, setShowDeleteButton] = useState(false)
     const [modal, setModal] = useState(false)
-    const {loading, request} = useHttp()
     const [formQuestion, setFormQuestion] = useState({
         question : '', id : ''
     })
 
-
-    async function deleteQuestions() {
+    const deleteQuestions = async () => {
         try {
-            const data = await request('/api/question/delete', 'DELETE', {...formQuestion})
+            await API.delete('https://back-test1.herokuapp.com/api/question/delete', {...formQuestion})
             setModal(!modal)
-        } catch (err) {}
+        } catch (error) {
+            console.log(error)
+        }
     }
+
     const handlerModal = () => {
         setModal(!modal)
         setFormQuestion({

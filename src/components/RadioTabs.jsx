@@ -1,26 +1,25 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useHttp } from '../hooks/http.hook';
+import { API } from '../axios/axios';
 
 export default function RadioTabs(props) {
     //const [selected, setSeleced] = useState('')
     const [data, setData] = useState([])
-    const { loading, request} = useHttp()
 
     let host = window.location.pathname.split("/")[1] === 'addnew'
-    
-    const fetchData = useCallback(async () => {
+
+    const getData = useCallback( async () => {
         try {
-            const fetched = await request('/api/question/topic/get', 'GET', null)
-            setData(fetched)
-        } catch (e) {
-            console.log(e.message)
+            const response = await API.get('https://back-test1.herokuapp.com/api/question/topic/get')
+            setData(response.data)
+        } catch (error) {
+            console.log(error)
         }
-    }, [request])
-    
+    })
     
     useEffect(() => {
-        fetchData()
-    }, [fetchData])
+        getData()
+    },[getData])
+    
     
     const radioTabs = data.map(data => 
         <div key={data._id} className="radio-form">

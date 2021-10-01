@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import RadioTabs from './RadioTabs.jsx'
-import { useHttp } from '../hooks/http.hook.js';
 
 export default function AddNewQuestion() {
     const [sendConfirm, SetSendConfirm] = useState(false)
     const [error, setError] = useState(false)
-    const {loading, request} = useHttp()
     const [formQuestion, setFormQuestion] = useState({
         question: '', topic: ''
     })
@@ -27,27 +25,30 @@ export default function AddNewQuestion() {
     const pushNewQuestion = async () => {
         try {
             if (formQuestion.question.length > 0 && formQuestion.topic.length > 0) {
-                const data = await request('/api/question/send', 'POST', {...formQuestion})
-                setFormQuestion({ question: ''})
+                await API.post('https://back-test1.herokuapp.com/api/question', {...formQuestion})
                 SetSendConfirm(true)
-            }
-            else {
+                setFormQuestion({ question: ''})
+            } else {
                 setError(true)
             }
-        } catch (err) {}
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const pushNewTopic = async () => {
         try {
             if (formTopic.topic.length > 0) {
-                const data = await request('/api/question/topic', 'POST', {...formTopic})
+                await API.post('https://back-test1.herokuapp.com/api/question/topic', {...formQuestion})
                 setFormTopic({ topic : '', level : '1' })
                 SetSendConfirm(true)
             }
             else {
                 setError(true)
             }
-        } catch (err) {}
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -61,14 +62,12 @@ export default function AddNewQuestion() {
                 onChange={changeFormQuestion} 
                 value={formQuestion.question} 
                 type="text" 
-                disabled={loading}
                 className="input question-input"
                 name="question"
                 id="question"
                 />
                 <button 
                 onClick={pushNewQuestion} 
-                disabled={loading}
                 className="button question-button"
                 >create new questions</button>
             </div>
@@ -78,14 +77,12 @@ export default function AddNewQuestion() {
                 onChange={changeFormTopic} 
                 value={formTopic.topic} 
                 type="text" 
-                disabled={loading}
                 className="input question-input"
                 name="topic"
                 id="topic"
                 />
                 <button 
                 onClick={pushNewTopic} 
-                disabled={loading}
                 className="button question-button"
                 >create new topic</button>
             </div>
