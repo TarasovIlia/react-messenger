@@ -40,9 +40,6 @@ module.exports = {
         extensions: ["*", ".js", ".jsx"] ,
     },
     devServer: {
-        proxy: {
-            '/api': 'https://react-messenger-server.herokuapp.com',
-        },
         allowedHosts: [
             '.herokuapp.com'
         ],

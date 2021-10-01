@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useHttp } from '../hooks/http.hook.js';
 import QuestionsCard from './QuestionsCard';
 import RadioTabs from './RadioTabs.jsx';
+import axios from 'axios'
 
 export default function Questions() {
     const [filter, setFilter] = useState('')
