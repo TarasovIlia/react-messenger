@@ -16,6 +16,16 @@
     }
 }
 
+.add-new {
+    color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+        font-weight: 600;
+    }
+}
+
 .simple-card {
     padding: 16px 12px;
     transition-duration: 0.3s;
