@@ -7,7 +7,7 @@
     "node": "16.5.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack server --mode development",
+    "start": "cross-env NODE_ENV=production webpack server --mode production",
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "prod": "cross-env NODE_ENV=production webpack --mode production"
   },
