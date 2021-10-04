@@ -55,7 +55,7 @@ export default function QuestionsList() {
                 {questionList[data.length === 1 ? 0 : ind]}
             </section>
             :
-            <h1 style={{ marginTop : '120px' }}>No more qustions</h1>
+            <h1 style={{ marginTop : '120px' }}>No more questions</h1>
             }
             {disable || <button 
             disabled={disable} 
