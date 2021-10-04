@@ -19,7 +19,7 @@ export default function QuestionsList() {
     
     useEffect(()=>{
         getData()
-    }, [getData])
+    }, [])
     
     
     const data = filter ?  questions.filter(question => question.topic === filter) : questions

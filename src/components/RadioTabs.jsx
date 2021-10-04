@@ -20,7 +20,7 @@ export default function RadioTabs(props) {
     
     useEffect(() => {
         getData()
-    },[getData])
+    },[])
     
     
     const radioTabs = data.map(data => 

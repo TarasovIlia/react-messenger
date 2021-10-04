@@ -25,7 +25,7 @@ export default function Questions() {
     
     useEffect(() => {
         getData(limit)
-    },[getData])
+    },[limit])
 
     const filterResult = filter ? data.filter(data => data.topic === filter) : data
     const questionCard = filterResult.map(data => <QuestionsCard question={data.question} id={data._id} topic={data.topic} key={data._id} />)
