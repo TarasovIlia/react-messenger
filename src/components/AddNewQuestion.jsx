@@ -1,6 +1,6 @@
-import React, { useState, Suspense } from 'react';
-import Spinner from './spinner/Spinner.jsx';
-const RadioTabs = React.lazy(() => import ('./RadioTabs.jsx'))
+import React, { useState } from 'react';
+import { API } from '../axios/axios';
+import RadioTabs from'./RadioTabs.jsx' 
 
 export default function AddNewQuestion() {
     const [sendConfirm, SetSendConfirm] = useState(false)
@@ -26,7 +26,7 @@ export default function AddNewQuestion() {
     const pushNewQuestion = async () => {
         try {
             if (formQuestion.question.length > 0 && formQuestion.topic.length > 0) {
-                await API.post('/api/question', {...formQuestion})
+                await API.post('/api/question/send', {...formQuestion})
                 SetSendConfirm(true)
                 setFormQuestion({ question: ''})
             } else {
@@ -56,9 +56,7 @@ export default function AddNewQuestion() {
         <div className="form">
             <div className='input-container'>
                 <div className='radio-container'>
-                    <Suspense fallback={<Spinner />}>
-                        <RadioTabs handelTopic={handelTopic} />
-                    </Suspense>
+                    <RadioTabs handelTopic={handelTopic} />
                 </div>
                 <label className='label-form' htmlFor="question"><p>question</p></label>
                 <input 

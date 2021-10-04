@@ -5,10 +5,10 @@ export default function Header() {
     return (
         <header className='header'>
             <div className='navigation-container'>
-                <Link to='/'>Home</Link>
-                <Link to='/questions'>Questions</Link>
-                <Link to='/all'>All questions</Link>
-                <Link to='/addnew'>Add new</Link>
+                <Link to='/'><p>Home</p></Link>
+                <Link to='/questions'><p>Questions</p></Link>
+                <Link to='/all'><p>All questions</p></Link>
+                <Link to='/addnew'><p>Add new</p></Link>
             </div>
         </header>
     )

@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { API } from '../axios/axios';
+import Spinner from './spinner/Spinner'
 
 export default function RadioTabs(props) {
-    //const [selected, setSeleced] = useState('')
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
 
-    let host = window.location.pathname.split("/")[1] === 'addnew'
+    const host = window.location.pathname.split("/")[1] === 'addnew'
 
     const getData = useCallback( async () => {
         try {
             const response = await API.get('/api/question/topic/get')
             setData(response.data)
+            setLoading(true)
         } catch (error) {
             console.log(error)
         }
@@ -30,11 +32,15 @@ export default function RadioTabs(props) {
     
     return (
         <div>
-            {host || <div className="radio-form">
-                <input defaultChecked onClick={() => props.handelTopic('')} className='radio' type='radio' name='topic' id='all'/>
-                <label htmlFor='all' className='radio-label'><p>All topic</p></label>
+            {!loading ? <Spinner /> 
+            :
+            <div>
+                {host || <div className="radio-form">
+                    <input defaultChecked onClick={() => props.handelTopic('')} className='radio' type='radio' name='topic' id='all'/>
+                    <label htmlFor='all' className='radio-label'><p>All topic</p></label>
+                </div>}
+                {radioTabs}
             </div>}
-            {radioTabs}
         </div>
     )
 }

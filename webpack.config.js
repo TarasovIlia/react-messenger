@@ -46,6 +46,7 @@ module.exports = {
         static: {
             directory: srcPath
         },
+        historyApiFallback: true,
         port: process.env.PORT || 4000,
         hot: true
     },

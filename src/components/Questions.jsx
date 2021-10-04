@@ -2,8 +2,7 @@ import React, { useState, useCallback, useEffect, Suspense} from 'react';
 import { Link } from 'react-router-dom'
 import { API } from '../axios/axios.jsx';
 import QuestionsCard from './QuestionsCard';
-import Spinner from './spinner/Spinner'
-const RadioTabs = React.lazy(() => import ('./RadioTabs.jsx'))
+import RadioTabs from './RadioTabs.jsx'
 
 export default function Questions() {
     const [filter, setFilter] = useState('')
@@ -29,9 +28,7 @@ export default function Questions() {
     
     return (
         <div>
-            <Suspense fallback={<Spinner />}>
-                <RadioTabs handelTopic={handelTopic} />
-            </Suspense>
+            <RadioTabs handelTopic={handelTopic} />
             <section className='dispalay'>
                 {questionCard}
                 <Link to="/addnew">

@@ -8,8 +8,10 @@
     background-color: rgba(255, 255, 255, 0.377);
     z-index: 99;
     backdrop-filter: saturate(180%) blur(5px);
-    h2 {
-        cursor: pointer;
+    p {
+        &:hover {
+            color: blue;
+        }
     }
     .navigation-container {
         width: 80%;
