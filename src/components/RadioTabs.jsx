@@ -22,25 +22,24 @@ export default function RadioTabs(props) {
         getData()
     },[])
     
-    
     const radioTabs = data.map(data => 
         <div key={data._id} className="radio-form">
             <input onClick={() => props.handelTopic(data.topic)} className='radio' type='radio' name='topic' id={data.topic}/>
             <label className='radio-label' htmlFor={ data.topic}><p>{ data.topic}</p></label>
         </div>
     )
+
+    if (!loading) {
+        return <Spinner /> 
+    }
     
     return (
         <div>
-            {!loading ? <Spinner /> 
-            :
-            <div>
-                {host || <div className="radio-form">
-                    <input defaultChecked onClick={() => props.handelTopic('')} className='radio' type='radio' name='topic' id='all'/>
-                    <label htmlFor='all' className='radio-label'><p>All topic</p></label>
-                </div>}
-                {radioTabs}
+            {host || <div className="radio-form">
+                <input defaultChecked onClick={() => props.handelTopic('')} className='radio' type='radio' name='topic' id='all'/>
+                <label htmlFor='all' className='radio-label'><p>All topic</p></label>
             </div>}
+            {radioTabs}
         </div>
     )
 }

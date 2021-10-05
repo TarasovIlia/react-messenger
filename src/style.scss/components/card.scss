@@ -16,13 +16,17 @@
     }
 }
 
-.add-new {
-    color: blue;
+.centre {
     display: flex;
     justify-content: center;
-    align-items: center;
-    p {
-        font-weight: 600;
+    margin-top: 40px;
+    .add-new {
+        color: blue;
+        cursor: pointer;
+        box-shadow: none;
+        p {
+            font-weight: 600;
+        }
     }
 }
 

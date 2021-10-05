@@ -4,19 +4,21 @@ import QuestionsCard from './QuestionsCard';
 import RadioTabs from './RadioTabs.jsx'
 
 export default function Questions() {
-    const [filter, setFilter] = useState('')
+    const [topic, setTopic] = useState('')
     const [data, setData] = useState([])
     const [limit, setLimit] = useState(1)
 
-    const sendLimit = async () => {
+    const sendLimit = () => {
         setLimit(limit+1)
     }
 
-    const handelTopic = topic => setFilter(topic)
+    const handelTopic = topic => {
+        setTopic(topic)
+    }
 
-    const getData = useCallback( async limit => {
+    const getData = useCallback( async (limit, topic) => {
         try {
-            await API.get(`/api/question/page?limit=${limit}`)
+            await API.get(`/api/question/page?limit=${limit}&topic=${topic}`)
                 .then(response => setData(response.data))
         } catch (error) {
             console.log(error)
@@ -24,21 +26,22 @@ export default function Questions() {
     })
     
     useEffect(() => {
-        getData(limit)
-    },[limit])
+        getData(limit, topic)
+    },[limit, topic])
 
-    const filterResult = filter ? data.filter(data => data.topic === filter) : data
-    const questionCard = filterResult.map(data => <QuestionsCard question={data.question} id={data._id} topic={data.topic} key={data._id} />)
+    const questionCard = data.map(data => <QuestionsCard question={data.question} id={data._id} topic={data.topic} key={data._id} />)
     
     return (
         <div>
             <RadioTabs handelTopic={handelTopic} />
             <section className='dispalay'>
                 {questionCard}
-                <div className='card add-new' onClick={() => sendLimit()}>
-                    <p>Load more</p>
-                </div>
             </section>
+            <div className='centre'>
+                <button className='button add-new' onClick={() => sendLimit()}>
+                    <p>Load more</p>
+                </button>
+            </div>
         </div>
     )
 }
