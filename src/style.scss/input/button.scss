@@ -59,6 +59,13 @@
     }
 }
 
+.disable {
+    opacity: 0.4;
+    &:hover {
+      box-shadow: 1px 1px 6px 0px rgb(129, 129, 129);
+    }
+  }
+
 .hide {
     transition-duration: 0.2s;
     transform: translateX(200px);

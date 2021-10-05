@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, Suspense} from 'react';
 import { API } from '../axios/axios.jsx';
-import QuestionsCard from './QuestionsCard';
-import RadioTabs from './RadioTabs.jsx'
+import QuestionsCard from '../components/QuestionsCard';
+import RadioTabs from '../components/RadioTabs.jsx'
 
 export default function Questions() {
     const [topic, setTopic] = useState('')

@@ -1,30 +1,28 @@
-import Card from './Card.jsx';
-import RadioTabs from './RadioTabs'
+import Card from '../components/Card.jsx';
 import React, { useState, useCallback, useEffect } from 'react';
 import { API } from '../axios/axios.jsx';
 
-export default function QuestionsList() {
-    const [filter, setFilter] = useState('')
+export default function QuestionsList(props) {
+    const [topic, setTopic] = useState('keke')
     const [ind, setInd] = useState(0)
-    const [questions, setQuestions] = useState([])
+    const [data, setData] = useState([])
 
-    const getData = useCallback( async () => {
+    const getData = useCallback( async (topic) => {
         try {
-            const response = await API.get('/api/question')
-            setQuestions(response.data)
+            API.get(`/api/question?topic=${topic}`)
+                .then(response => setData(response.data))
         } catch (error) {
             console.log(error)
         }
     })
-    
+
+    console.log(props.topic)
+
     useEffect(()=>{
-        getData()
-    }, [])
+        getData(props.topic)
+    }, [props.topic])
     
-    
-    const data = filter ?  questions.filter(question => question.topic === filter) : questions
     const questionList = data.map(data => <Card key={data.key} question={data.question} topic={data.topic} resolved={data.resolved}/>)
-    const handelTopic = filter => setFilter(filter)
     
     function randomInd()  {
         return (Math.floor(Math.random() * 10)) % data.length
@@ -49,7 +47,6 @@ export default function QuestionsList() {
 
     return (
         <div className='list'>
-            <RadioTabs handelTopic={handelTopic} />
             {!disable ? 
             <section className='question'>
                 {questionList[data.length === 1 ? 0 : ind]}

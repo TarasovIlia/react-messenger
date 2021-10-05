@@ -1,0 +1,52 @@
+.modal-window-main-wrapper {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.658);
+  backdrop-filter: saturate(180%) blur(2px);
+  .window {
+    width: 80%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: $boxShadow;
+    position: relative;
+    .input-from {
+      width: 60%;
+      margin: 0px auto;
+      margin-top: 200px;
+      height: 200px;
+      >.question-input {
+        &:nth-child(2) {
+          margin-bottom: 50px;
+        }
+      }
+    }
+    .sign-in-button {
+      color: blue;
+    }
+    .centre {
+      .message-error {
+        background-color: #fff;
+        padding: 12px 28px;
+        border-radius: 6px;
+        box-shadow: $boxShadowButton;
+        color: red;
+        position: absolute;
+        margin: 0px auto;
+      }
+    }
+  }
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color:red;
+  }
+}

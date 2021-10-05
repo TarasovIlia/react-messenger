@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { API } from '../axios/axios';
-import RadioTabs from'./RadioTabs.jsx' 
+import RadioTabs from'../components/RadioTabs.jsx' 
 
 export default function AddNewQuestion() {
     const [sendConfirm, SetSendConfirm] = useState(false)
