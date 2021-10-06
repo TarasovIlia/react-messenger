@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { API } from '../axios/axios'
+import React, { useState } from 'react';
+import { API } from '../axios/axios';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function QuestionsCard(props) {
+    const user = useSelector((state) =>  state.user.value.user)
     const [showDeleteButton, setShowDeleteButton] = useState(false)
     const [modal, setModal] = useState(false)
     const [formQuestion, setFormQuestion] = useState({
@@ -31,12 +33,12 @@ export default function QuestionsCard(props) {
         onMouseLeave={() => setShowDeleteButton(!showDeleteButton)}
         className="card"
         >
-            <button 
+            {user.admin && <button 
             onClick={handlerModal} 
             className={showDeleteButton ? 'button-delete' : 'hide button-delete'} 
             style={{color : 'red'}}
-            >Delete</button>
-            {modal && 
+            >Delete</button>}
+            {modal &&
             <div className='modal-cart-menu'>
                 <p className='topic'>delete selected questions?</p>
                 <div className='row'>

@@ -18,7 +18,16 @@
         height: 100%;
         margin: 0px auto;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+        .authorize-container {
+            width: 23%;
+            display: flex;
+            align-content: center;
+            justify-content: space-between;
+            .log-out-button {
+                width: 90%;
+            }
+        }
     }
 }

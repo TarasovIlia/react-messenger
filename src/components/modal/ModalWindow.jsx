@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setModal } from '../../modal/createModal'
 import { API } from '../../axios/axios'
 import ErrorModal from './ErrorModal'
+import jwtDecode from 'jwt-decode';
 
 export default function ModalWindow() {
   const [disable, setDisable] = useState(true)
@@ -29,8 +30,12 @@ export default function ModalWindow() {
 
   const sendForm = () => {
     if (!disable) {
-      API.post('/api/auth/register', {...formUser})
-        .then(response => setResponce(response.data))
+      API.post('/api/auth/login', {...formUser})
+        .then(response => {
+          setResponce(response.data)
+          const decoded = jwtDecode(response.data.token)
+          localStorage.setItem('user', JSON.stringify(decoded))
+        })
         .catch(err => {
           setError(err.response.data.message)
         })
@@ -38,9 +43,9 @@ export default function ModalWindow() {
           email: '', password: ''
         }),
         setDisable(true)
+      }
     }
-  }
-
+    
   const message = <div className='input-from'><h1 style={{textAlign: 'center', color: 'blue'}}>{response.message}</h1></div>
 
   return (

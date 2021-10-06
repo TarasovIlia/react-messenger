@@ -20,7 +20,7 @@ export default function RadioTabs(props) {
     
     useEffect(() => {
         getData()
-    })
+    }, [])
     
     const radioTabs = data.map(data => 
         <div key={data._id} className="radio-form">

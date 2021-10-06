@@ -4,14 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App.jsx';
 import { Provider } from 'react-redux';
 import store from './store'
-import {
-    withRouter,
-    BrowserRouter as Router,
-    Route, 
-    Link, 
-    Switch, 
-    Redirect
-} from "react-router-dom";
+import { Router } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
 const mainApp = document.getElementById('root')
