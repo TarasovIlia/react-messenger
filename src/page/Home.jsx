@@ -3,20 +3,39 @@ import RadioTabs from '../components/RadioTabs';
 import QuestionsList from './QuestionsList';
 
 export default function Home () {
+    const [done, setDone] = useState(false)
     const [topic, setTopic] = useState('')
     const [showTabs, setShowTabs] = useState(false)
     const [showQuestions, setShowQuestions] = useState(false)
 
-    const handelTopic = topic => {
+    const handleTopic = topic => {
         setTopic(topic)
     }
 
+    const handleDone = done => {
+        setDone(done)
+    }
+
+    const finishTopic = () => {
+        setShowQuestions(!showQuestions)
+        setDone(false)
+    }
+
+    if(showTabs) {
+        return (
+            <div>
+                <p>{done}</p>
+                {showQuestions || <RadioTabs handleTopic={handleTopic} />}
+                {showQuestions || <button onClick={() => setShowQuestions(!showQuestions)} className='button button-next'>Confirm</button>}
+                {showQuestions && <QuestionsList handleDone={handleDone} topic={topic} />}
+                {done && <button onClick={finishTopic} className='button button-next'>Next topic</button>}
+            </div>
+        )
+    }
+    
     return (
         <div>
-            {showTabs && <RadioTabs handelTopic={handelTopic} />}
-            {showTabs && <button onClick={() => setShowQuestions(!showQuestions)} className='button'>Confirm</button>}
-            <button onClick={() => setShowTabs(!showTabs)} className='button'>{showTabs? 'Back' : 'Start'}</button>
-            {showQuestions && <QuestionsList topic={topic} />}
+            <button onClick={() => setShowTabs(!showTabs)} className='button'>Start</button>
         </div>
     )
 }

@@ -3,9 +3,9 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { API } from '../axios/axios.jsx';
 
 export default function QuestionsList(props) {
-    const [topic, setTopic] = useState('keke')
     const [ind, setInd] = useState(0)
     const [data, setData] = useState([])
+    const [done, setDone] = useState(false)
 
     const getData = useCallback( async (topic) => {
         try {
@@ -16,8 +16,6 @@ export default function QuestionsList(props) {
         }
     })
 
-    console.log(props.topic)
-
     useEffect(()=>{
         getData(props.topic)
     }, [props.topic])
@@ -25,7 +23,7 @@ export default function QuestionsList(props) {
     const questionList = data.map(data => <Card key={data.key} question={data.question} topic={data.topic} resolved={data.resolved}/>)
     
     function randomInd()  {
-        return (Math.floor(Math.random() * 10)) % data.length
+        return (Math.floor(Math.random() * 100)) % data.length
     }
     
     function nextQuestion() {
@@ -34,31 +32,39 @@ export default function QuestionsList(props) {
             if ( nextInd != ind ) {
                 setInd(nextInd)
                 data.splice(ind, 1)
-            }
-            else {
+            } else {
                 nextQuestion()
             }
+        } else {
+            props.handleDone(true)
+            setDone(true)
         }
     }
-    
-    const disable = data.length < 1
-    const done = data.length === 1
+
     const className = done ? 'button button-next done' : 'button button-next'
+
+    if (done) {
+        return (
+            <div className='list'>
+                <h1 style={{ color : 'blue' }}>Well done!</h1>
+            </div>
+        )
+    }
 
     return (
         <div className='list'>
-            {!disable ? 
+            {!done ? 
             <section className='question'>
                 {questionList[data.length === 1 ? 0 : ind]}
             </section>
             :
-            <h1 style={{ marginTop : '120px' }}>No more questions</h1>
-            }
-            {disable || <button 
-            disabled={disable} 
+            <h1 style={{ marginTop : '120px' }}>No question</h1>
+        }
+            {done || <button 
+            disabled={done} 
             className={className}
             onClick={nextQuestion}
-            >{done ? 'done' : 'next'}</button>}
+            >Done</button>}
         </div>
     )
 }

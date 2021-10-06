@@ -20,11 +20,11 @@ export default function RadioTabs(props) {
     
     useEffect(() => {
         getData()
-    },[])
+    })
     
     const radioTabs = data.map(data => 
         <div key={data._id} className="radio-form">
-            <input onClick={() => props.handelTopic(data.topic)} className='radio' type='radio' name='topic' id={data.topic}/>
+            <input onClick={() => props.handleTopic(data.topic)} className='radio' type='radio' name='topic' id={data.topic}/>
             <label className='radio-label' htmlFor={ data.topic}><p>{ data.topic}</p></label>
         </div>
     )
