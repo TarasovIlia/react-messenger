@@ -40,7 +40,7 @@ export default function ModalWindow() {
           dispatch(loginUser(decode))
         })
         .catch(err => {
-          setError(err.response)
+          setError(err.response.data.message)
         })
         setFormUser({
           email: '', password: ''
