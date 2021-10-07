@@ -35,11 +35,17 @@ export default function RadioTabs(props) {
     
     return (
         <div>
-            {host || <div className="radio-form">
-                <input defaultChecked onClick={() => props.handelTopic('')} className='radio' type='radio' name='topic' id='all'/>
+            {!host && 
+            <div className="radio-form">
+                <input defaultChecked onClick={() => props.handleTopic('')} className='radio' type='radio' name='topic' id='all'/>
                 <label htmlFor='all' className='radio-label'><p>All topic</p></label>
             </div>}
             {radioTabs}
+            {host && 
+            <div className="radio-form">
+                <input onClick={() => props.handleTopicWindow()} className='radio' type='radio' id='all'/>
+                <label htmlFor='all' className='radio-label'><p style={{ color : 'blue'}}>add new topic</p></label>
+            </div>}
         </div>
     )
 }
