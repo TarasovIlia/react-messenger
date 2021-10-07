@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -15,12 +15,25 @@ import AddNewQuestion from './page/AddNewQuestion.jsx';
 import Header from './components/Header.jsx';
 import QuestionsList from './page/QuestionsList.jsx';
 import ModalWindow from './components/modal/ModalWindow';
+import { loginUser } from './user/userReducer';
+import jwtDecode from 'jwt-decode'
 
 const modalWindow = document.getElementById('modal-window')
 
-function App() {
-    const modal = useSelector((state) => state.modal.value)
 
+function App() {
+    const dispatch = useDispatch()
+    const modal = useSelector((state) => state.modal.value)
+    const token = localStorage.getItem('token')
+
+    function checkUser() {
+        token ? dispatch(loginUser(jwtDecode(token))) : 0
+    }
+
+    useEffect(() => {
+        checkUser()
+    })
+    
     return (
         <div>
             <Header />

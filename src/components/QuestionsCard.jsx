@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function QuestionsCard(props) {
-    const user = useSelector((state) =>  state.user.value.user)
+    const user = useSelector((state) =>  state.user.value.currentUser)
     const [showDeleteButton, setShowDeleteButton] = useState(false)
     const [modal, setModal] = useState(false)
     const [formQuestion, setFormQuestion] = useState({

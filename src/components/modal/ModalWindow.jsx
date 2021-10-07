@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setModal } from '../../modal/createModal'
 import { API } from '../../axios/axios'
 import ErrorModal from './ErrorModal'
+import { loginUser } from '../../user/userReducer'
 import jwtDecode from 'jwt-decode';
 
 export default function ModalWindow() {
@@ -33,11 +34,13 @@ export default function ModalWindow() {
       API.post('/api/auth/login', {...formUser})
         .then(response => {
           setResponce(response.data)
-          const decoded = jwtDecode(response.data.token)
-          localStorage.setItem('user', JSON.stringify(decoded))
+          localStorage.setItem('token', JSON.stringify(response.data.token))
+          const token = localStorage.getItem('token')
+          const decode = jwtDecode(token)
+          dispatch(loginUser(decode))
         })
         .catch(err => {
-          setError(err.response.data.message)
+          setError(err.response)
         })
         setFormUser({
           email: '', password: ''

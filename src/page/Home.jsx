@@ -23,8 +23,9 @@ export default function Home () {
 
     if(showTabs) {
         return (
-            <div>
+            <div className='select-topic-container'>
                 <p>{done}</p>
+                {showQuestions || <h1>Select a topic</h1>}
                 {showQuestions || <RadioTabs handleTopic={handleTopic} />}
                 {showQuestions || <button onClick={() => setShowQuestions(!showQuestions)} className='button button-next'>Confirm</button>}
                 {showQuestions && <QuestionsList handleDone={handleDone} topic={topic} />}

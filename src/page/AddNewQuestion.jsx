@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { API } from '../axios/axios';
-import RadioTabs from'../components/RadioTabs.jsx' 
+import RadioTabs from'../components/RadioTabs.jsx';
+import { Link } from 'react-router-dom'
 
 export default function AddNewQuestion() {
     const [sendConfirm, SetSendConfirm] = useState(false)
     const [error, setError] = useState(false)
+    const admin  = useSelector(state => state.user.value.currentUser.admin)
     const [formQuestion, setFormQuestion] = useState({
         question: '', topic: ''
     })
@@ -12,7 +15,7 @@ export default function AddNewQuestion() {
         topic : '', level : '1'
     })
 
-    const handelTopic = selectedTopic => setFormQuestion({topic: selectedTopic})
+    const handleTopic = selectedTopic => setFormQuestion({topic: selectedTopic})
 
     const changeFormQuestion = event => {
         setFormQuestion({ ...formQuestion, [event.target.name] : event.target.value})
@@ -52,11 +55,21 @@ export default function AddNewQuestion() {
         }
     }
 
+    if (!admin) {
+        return (
+            <div style={{ textAlign: 'center'}}>
+                <h1 style={{ color: 'blue'}}>Sorry, you don't have permission for this action</h1>
+                <p style={{ marginTop : '44px'}}>Log in like admin to have access</p>
+                <Link to='/'><button style={{ marginTop : '35px'}} className='button'>Go to home page</button></Link>
+            </div>
+        )
+    }
+
     return (
         <div className="form">
             <div className='input-container'>
                 <div className='radio-container'>
-                    <RadioTabs handelTopic={handelTopic} />
+                    <RadioTabs handleTopic={handleTopic} />
                 </div>
                 <label className='label-form' htmlFor="question"><p>question</p></label>
                 <input 

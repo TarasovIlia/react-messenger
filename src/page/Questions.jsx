@@ -12,7 +12,7 @@ export default function Questions() {
         setLimit(limit+1)
     }
 
-    const handelTopic = topic => {
+    const handleTopic = topic => {
         setTopic(topic)
     }
 
@@ -33,7 +33,7 @@ export default function Questions() {
     
     return (
         <div>
-            <RadioTabs handelTopic={handelTopic} />
+            <RadioTabs handleTopic={handleTopic} />
             <section className='dispalay'>
                 {questionCard}
             </section>
