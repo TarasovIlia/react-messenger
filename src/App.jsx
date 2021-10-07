@@ -23,7 +23,7 @@ const modalWindow = document.getElementById('modal-window')
 
 function App() {
     const dispatch = useDispatch()
-    const modal = useSelector((state) => state.modal.value)
+    const modal = useSelector((state) => state.modal.value.open)
     const token = localStorage.getItem('token')
 
     function checkUser() {

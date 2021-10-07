@@ -23,16 +23,16 @@ export default function Header() {
                 {!user.email ?
                 <div className='authorize-container'>
                     <button
-                    onClick={() => dispatch(setModal())}
-                    className='button'
+                    onClick={() => dispatch(setModal('register'))}
+                    className='button authorization'
                     >Sign up</button>
                     <button
-                    onClick={() => dispatch(setModal())}
-                    className='button'
+                    onClick={() => dispatch(setModal('login'))}
+                    className='button authorization'
                     >Log in</button>
                 </div>
                 :
-                <div className='authorize-container'>
+                <div>
                     <button 
                     className='button log-out-button'
                     onMouseEnter={() => setLogOut('Log out')}

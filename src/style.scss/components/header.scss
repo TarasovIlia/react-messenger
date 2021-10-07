@@ -21,13 +21,15 @@
         align-items: center;
         justify-content: space-between;
         .authorize-container {
-            width: 23%;
             display: flex;
             align-content: center;
             justify-content: space-between;
-            .log-out-button {
-                width: 90%;
+            .authorization {
+                margin: 0px 10px;
             }
+        }
+        .log-out-button {
+            width: 260px;
         }
     }
 }

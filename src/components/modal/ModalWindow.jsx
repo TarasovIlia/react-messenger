@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setModal } from '../../modal/createModal'
-import { API } from '../../axios/axios'
-import ErrorModal from './ErrorModal'
-import { loginUser } from '../../user/userReducer'
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../../modal/createModal';
+import { API } from '../../axios/axios';
+import ErrorModal from './ErrorModal';
+import { loginUser } from '../../user/userReducer';
 import jwtDecode from 'jwt-decode';
+import Spinner from '../spinner/Spinner';
 
 export default function ModalWindow() {
   const [disable, setDisable] = useState(true)
   const [response, setResponce] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const path = useSelector(state => state.modal.value.type)
   const [error, setError] = useState(false)
   const dispatch = useDispatch();
   const [formUser, setFormUser] = useState({
@@ -22,7 +25,7 @@ export default function ModalWindow() {
   }
 
   const checkForm = () => {
-    if (formUser.email.length > 7 && formUser.password.length > 5) {
+    if (formUser.email.length > 7 && formUser.password.length > 4) {
       setDisable(false)
     } else {
       setDisable(true)
@@ -31,7 +34,8 @@ export default function ModalWindow() {
 
   const sendForm = () => {
     if (!disable) {
-      API.post('/api/auth/login', {...formUser})
+      setLoading(true)
+      API.post(`/api/auth/${path}`, {...formUser})
         .then(response => {
           setResponce(response.data)
           localStorage.setItem('token', JSON.stringify(response.data.token))
@@ -39,17 +43,28 @@ export default function ModalWindow() {
           const decode = jwtDecode(token)
           dispatch(loginUser(decode))
         })
+        .then(() => {
+          setLoading(false)
+          setFormUser({
+            email: '', password: ''
+          })
+        })
         .catch(err => {
           setError(err.response.data.message)
         })
-        setFormUser({
-          email: '', password: ''
-        }),
-        setDisable(true)
-      }
+      setDisable(true)
     }
+  }
     
   const message = <div className='input-from'><h1 style={{textAlign: 'center', color: 'blue'}}>{response.message}</h1></div>
+
+  if (loading) {
+    return (
+      <div className='modal-window-main-wrapper'>
+            <Spinner />
+      </div>
+    )
+  }
 
   return (
     <div className='modal-window-main-wrapper'>
