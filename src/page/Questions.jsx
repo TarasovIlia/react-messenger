@@ -37,11 +37,12 @@ export default function Questions() {
             <section className='dispalay'>
                 {questionCard}
             </section>
+            {(data.length < 11) ||
             <div className='centre'>
                 <button className='button add-new' onClick={() => sendLimit()}>
-                    <p>Load more</p>
+                    Load more
                 </button>
-            </div>
+            </div>}
         </div>
     )
 }

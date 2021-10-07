@@ -50,6 +50,7 @@ export default function ModalWindow() {
           })
         })
         .catch(err => {
+          setLoading(false)
           setError(err.response.data.message)
         })
       setDisable(true)
