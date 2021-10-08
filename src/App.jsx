@@ -17,6 +17,7 @@ import QuestionsList from './page/QuestionsList.jsx';
 import ModalWindow from './components/modal/ModalWindow';
 import { loginUser } from './user/userReducer';
 import jwtDecode from 'jwt-decode'
+import NotFound from './page/NotFound';
 
 const modalWindow = document.getElementById('modal-window')
 
@@ -51,6 +52,9 @@ function App() {
                         </Route>
                         <Route history={history} path='/questions'>
                             <QuestionsList />
+                        </Route>
+                        <Route>
+                            <NotFound />
                         </Route>
                     </Switch>
                 </div>

@@ -5,13 +5,15 @@ export const createModal = createSlice({
   initialState: {
     value: {
       open : true,
-      type : null
+      path : null,
+      name: null
     } 
   },
   reducers: {
     setModal: (state, action) => {
-      state.value.open = !state.value.open
-      state.value.type = action.payload
+      state.value.open = action.payload.open
+      state.value.path = action.payload.path
+      state.value.name = action.payload.modalName
     }
   }
 })

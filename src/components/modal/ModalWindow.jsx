@@ -11,7 +11,8 @@ export default function ModalWindow() {
   const [disable, setDisable] = useState(true)
   const [response, setResponce] = useState(false)
   const [loading, setLoading] = useState(false)
-  const path = useSelector(state => state.modal.value.type)
+  const path = useSelector(state => state.modal.value.path)
+  const name = useSelector(state => state.modal.value.name)
   const [error, setError] = useState(false)
   const dispatch = useDispatch();
   const [formUser, setFormUser] = useState({
@@ -71,11 +72,11 @@ export default function ModalWindow() {
     <div className='modal-window-main-wrapper'>
       <div className='window'>
         <div className='centre'>
-        <h2>TEST</h2>
+        <h2>{name}</h2>
           {error && <ErrorModal message={error} />}
         </div>
         <button
-        onClick={() => dispatch(setModal())}
+        onClick={() => dispatch(setModal({open : true}))}
         className='button close-btn'
         >close</button>
         {response ? 
@@ -103,7 +104,7 @@ export default function ModalWindow() {
           {response ?
           <button
           className='button sign-in-button'
-          onClick={() => dispatch(setModal())}
+          onClick={() => dispatch(setModal({open : true}))}
           >proceed</button>
           :
           <button

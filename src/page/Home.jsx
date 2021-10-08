@@ -25,7 +25,7 @@ export default function Home () {
         return (
             <div className='select-topic-container'>
                 <p>{done}</p>
-                {showQuestions || <h1>Select a topic</h1>}
+                {showQuestions || <h1>Select topic</h1>}
                 {showQuestions || <RadioTabs handleTopic={handleTopic} />}
                 {showQuestions || <button onClick={() => setShowQuestions(!showQuestions)} className='button button-next'>Confirm</button>}
                 {showQuestions && <QuestionsList handleDone={handleDone} topic={topic} />}
@@ -35,7 +35,7 @@ export default function Home () {
     }
     
     return (
-        <div>
+        <div className='centre'>
             <button onClick={() => setShowTabs(!showTabs)} className='button'>Start</button>
         </div>
     )

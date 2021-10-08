@@ -23,11 +23,11 @@ export default function Header() {
                 {!user.email ?
                 <div className='authorize-container'>
                     <button
-                    onClick={() => dispatch(setModal('register'))}
+                    onClick={() => dispatch(setModal({ path:'register', modalName:'Sign up', open: false }))}
                     className='button authorization'
                     >Sign up</button>
                     <button
-                    onClick={() => dispatch(setModal('login'))}
+                    onClick={() => dispatch(setModal({ path : 'login', modalName:'Log in', open: false }))}
                     className='button authorization'
                     >Log in</button>
                 </div>
